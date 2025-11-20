@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Title</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 overflow-x-hidden overflow-y-hidden">
+<!-- Navbar -->
+<nav class="navbar bg-gray-100 dark:bg-gray-800">
+    <div class="nav-container">
+        <!-- Left -->
+        <ul class="nav-links">
+            <li><a id="navHome" class="text-blue-600 dark:text-blue-400" href="#">Home</a></li>
+            <li><a id="navProjects" class="text-blue-600 dark:text-blue-400" href="#">Projects</a></li>
+            <li><a id="navSocial" class="text-blue-600 dark:text-blue-400" href="#">Social</a></li>
+        </ul>
+
+        <!-- Right -->
+        <div class="nav-actions">
+            <button id="themeToggle"
+                    class="px-2 py-1 border rounded text-gray-900 bg-white dark:text-gray-100 dark:bg-gray-700"
+                    aria-pressed="false">Light</button>
+            <select id="langSelect"
+                    class="px-2 py-1 border rounded text-gray-900 bg-white dark:text-gray-100 dark:bg-gray-700"
+                    aria-label="Language select">
+                <option value="en">EN</option>
+                <option value="pl">PL</option>
+                <option value="jp">JP</option>
+            </select>
+        </div>
+
+    </div>
+</nav>
+
+<!-- Main -->
+<main class="main">
+    <div class="intro">
+        <h4 id="h4" class="text-red-500 dark:text-red-400">Semi!</h4>
+        <p>High schooler from Poland who studies web developing, Japanese language, Taekwondo and more!</p>
+    </div>
+</main>
+
+<!-- Script -->
+<script>
+    (function() {
+        const themeToggle = document.getElementById('themeToggle');
+        const langSelect = document.getElementById('langSelect');
+        const htmlEl = document.documentElement;
+        const navHome = document.getElementById('navHome');
+        const navProjects = document.getElementById('navProjects');
+        const navSocial = document.getElementById('navSocial');
+
+        const translations = {
+            en: { home: 'Home', projects: 'Projects', social: 'Social' },
+            pl: { home: 'Strona główna', projects: 'Projekty', social: 'Social' },
+            jp: { home: 'ホーム', projects: 'プロジェクト', social: 'ソーシャル' }
+        };
+
+        function applyLanguage(lang) {
+            const t = translations[lang] || translations.en;
+            navHome.textContent = t.home;
+            navProjects.textContent = t.projects;
+            navSocial.textContent = t.social;
+            htmlEl.lang = lang === 'jp' ? 'ja' : lang;
+            localStorage.setItem('site-lang', lang);
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark'); // toggle on <html>
+                themeToggle.textContent = 'Dark';
+                themeToggle.setAttribute('aria-pressed', 'true');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeToggle.textContent = 'Light';
+                themeToggle.setAttribute('aria-pressed', 'false');
+            }
+            localStorage.setItem('site-theme', theme);
+        }
+
+
+        const savedLang = localStorage.getItem('site-lang') || 'en';
+        const savedTheme = localStorage.getItem('site-theme') || 'light';
+        langSelect.value = savedLang;
+        applyLanguage(savedLang);
+        applyTheme(savedTheme);
+
+        langSelect.addEventListener('change', (e) => applyLanguage(e.target.value));
+        themeToggle.addEventListener('click', () => {
+            const current = localStorage.getItem('site-theme') || 'light';
+            applyTheme(current === 'light' ? 'dark' : 'light');
+        });
+    })();
+</script>
+</body>
+</html>

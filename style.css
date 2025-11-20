@@ -1,0 +1,58 @@
+/* Base styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Navbar container */
+.navbar {
+    position: sticky;
+    top: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.nav-links a {
+    text-decoration: none;
+    font-weight: 500;
+}
+.nav-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+.nav-actions button,
+.nav-actions select {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Main */
+.main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.intro {
+    text-align: center;
+}
+.intro h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
